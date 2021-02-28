@@ -28,7 +28,7 @@ public class UserRepositoryTest {
 		
 		User user = new User();
 		user.setName("Set up User");
-		user.setPassworld("senha123");
+		user.setPassword("senha123");
 		user.setEmail("setup@email.com");
 		
 
@@ -49,7 +49,7 @@ public class UserRepositoryTest {
 		User user = new User();
 		user.setName("teste");
 		user.setEmail("teste@teste");
-		user.setPassworld("123456");
+		user.setPassword("123456");
 		
 		User response = repository.save(user);
 		

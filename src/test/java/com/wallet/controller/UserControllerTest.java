@@ -1,5 +1,6 @@
 package com.wallet.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +30,7 @@ import com.wallet.service.UserService;
 @ActiveProfiles("test")
 public class UserControllerTest {
 	
+	private static final Long ID = 1L;
 	private static final String EMAIL = "email@teste.com";
 	private static final String NAME = "User Test";
 	private static final String PASSWORD = "123456";
@@ -44,27 +46,44 @@ public class UserControllerTest {
 	public void testSave() throws Exception {
 		
 		BDDMockito.given(service.save(Mockito.any(User.class))).willReturn(getMockUser());
-		mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload())
+		mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, NAME, EMAIL, PASSWORD))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isCreated());
+		.andExpect(status().isCreated())
+		.andExpect(jsonPath("$.data.id").value(ID))
+		.andExpect(jsonPath("$.data.name").value(NAME))
+		.andExpect(jsonPath("$.data.email").value(EMAIL))
+		.andExpect(jsonPath("$.data.password").doesNotExist());
+	
+	}
+	
+	@Test
+	public void testSaveInvalidUser() throws Exception {
+		
+		mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, NAME, "email", PASSWORD))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isBadRequest())
+		.andExpect(jsonPath("$.errors[0]").value("Email inválido"));
 	}
 	
 	public User getMockUser() {
 		User u = new User();
+		u.setId(ID);
 		u.setEmail(EMAIL);
 		u.setName(NAME);
-		u.setPassworld(PASSWORD);
+		u.setPassword(PASSWORD);
 		
 		return u;
 	}
 	
-	public String getJsonPayload() {
+	public String getJsonPayload(Long id, String name, String email, String password) {
 		
 		UserDTO dto = new UserDTO();
-		dto.setEmail(EMAIL);
-		dto.setName(NAME);
-		dto.setPassword(PASSWORD);
+		dto.setId(id);
+		dto.setEmail(email);
+		dto.setName(name);
+		dto.setPassword(password);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
