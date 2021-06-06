@@ -32,8 +32,6 @@ public class UserServiceTest {
 	@BeforeEach
 	public void setUp() {
 		BDDMockito.given(repository.findByEmailEquals(Mockito.anyString())).willReturn(Optional.of(new User()));
-		
-		System.out.print("passou aquii ---------------------------");
 	}
 	
 	@Test

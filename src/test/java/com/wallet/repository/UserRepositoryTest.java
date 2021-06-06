@@ -29,13 +29,9 @@ public class UserRepositoryTest {
 		User user = new User();
 		user.setName("Set up User");
 		user.setPassword("senha123");
-		user.setEmail("setup@email.com");
-		
+		user.setEmail("setup@email.com");	
 
 		repository.save(user);
-		
-		System.out.print("passou aquii ---------------------------");
-		
 	}
 	
 	@AfterEach
@@ -62,8 +58,6 @@ public class UserRepositoryTest {
 		
 		assertTrue(response.isPresent());
 		assertEquals(response.get().getEmail(), "setup@email.com");
-		
-		System.out.print("passou aquii ------------------------32222222222222---");
 	}
 	
 	
