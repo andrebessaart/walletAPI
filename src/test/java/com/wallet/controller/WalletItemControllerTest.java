@@ -114,7 +114,7 @@ public class WalletItemControllerTest {
 	
 	@Test
 	@WithMockUser
-	public void testFinByType() throws Exception {
+	public void testFindByType() throws Exception {
 		
 		List<WalletItem> list = new ArrayList<WalletItem>();
 		list.add(getMockWalletItem());

@@ -87,7 +87,7 @@ public class WalletItemController {
 	}
 	
 	@GetMapping(value = "/type/{wallet}")
-	public ResponseEntity<Response<List<WalletItemDTO>>> findBByWalletIdAndType(@PathVariable("wallet") Long wallet,
+	public ResponseEntity<Response<List<WalletItemDTO>>> findByWalletIdAndType(@PathVariable("wallet") Long wallet,
 			@RequestParam("type") String type) {
 		
 	    log.info("Buscando por carteira {} e tipo {}", wallet, type);
