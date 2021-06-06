@@ -76,7 +76,7 @@ public class WalletItemController {
 		Optional<UserWallet> uw =  Optional.ofNullable(userWalletService.findByUserIdAndWalletId(Util.getAuthenticatedUserId(), wallet));
 		
 		if(!uw.isPresent()) {
-			response.getErrors().add("Você não tem acesso a essa carteira!");
+			response.getErrors().add("Você não tem acesso a essa carteira");
 			return ResponseEntity.badRequest().body(response);
 		}
 		
