@@ -98,7 +98,7 @@ public class WalletItemControllerTest {
 		
 		BDDMockito.given(service.findBetweenDates(Mockito.anyLong(), Mockito.any(Date.class), Mockito.any(Date.class), Mockito.anyInt())).willReturn(page);
 		BDDMockito.given(userService.findByEmail(Mockito.anyString())).willReturn(Optional.of(user));
-		BDDMockito.given(userWalletService.findByUserIdAndWalletId(Mockito.anyLong(), Mockito.anyLong())).willReturn(Optional.of(new UserWallet()));
+		BDDMockito.given(userWalletService.findByUserIdAndWalletId(Mockito.anyLong(), Mockito.anyLong())).willReturn(new UserWallet());
 		
 		mvc.perform(MockMvcRequestBuilders.get(URL + "/1?startDate=" + startDate + "&endDate=" + endDate)
 				.contentType(MediaType.APPLICATION_JSON)

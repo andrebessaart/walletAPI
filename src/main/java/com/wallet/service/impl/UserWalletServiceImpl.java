@@ -1,7 +1,5 @@
 package com.wallet.service.impl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class UserWalletServiceImpl implements UserWalletService{
 	}
 	
 	@Override
-	public Optional<UserWallet> findByUserIdAndWalletId(Long user, Long wallet) {
+	public UserWallet findByUserIdAndWalletId(Long user, Long wallet) {
 		return repository.findByUserIdAndWalletId(user, wallet);
 	}
 
